@@ -1,9 +1,10 @@
-const passport = require('passport');
-const localStrategy = require('passport-local');
-const bcrypt = require('bcrypt');
-const GithubStrategy = require('passport-github2');
-const { config } = require('../config/config');
-const { usersModel } = require('../../dao/models/usersModel.js');
+import passport from 'passport';
+import localStrategy from 'passport-local';
+import bcrypt from 'bcrypt';
+import GithubStrategy from 'passport-github2';
+import { config } from '../config/config';
+import { usersModel } from '../../dao/models/usersModel.js';
+
 
 const createHash = (password) => {
     return bcrypt.hashSync(password, 10);
@@ -102,6 +103,4 @@ const initializePassport = () => {
 
 };
 
-module.exports = {
-    initializePassport
-};
+export { initializePassport };

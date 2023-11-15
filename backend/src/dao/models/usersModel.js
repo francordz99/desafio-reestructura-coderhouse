@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose, { Schema } from 'mongoose';
+
 const usersCollection = "users";
 
 const userSchema = new mongoose.Schema({
@@ -11,6 +12,5 @@ const userSchema = new mongoose.Schema({
     role: { type: String, default: 'user' },
 });
 
-module.exports = {
-    usersModel: mongoose.model(usersCollection, userSchema)
-}
+export const usersModel = mongoose.model(usersCollection, userSchema);
+

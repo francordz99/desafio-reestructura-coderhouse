@@ -1,6 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const MessageManager = require('../../dao/mongodb/messageManager');
+import express from 'express';
+import { Router } from 'express';
+import MessageManager from '../../dao/mongodb/messageManager';
+
+const router = Router();
+
 
 const messageManager = new MessageManager();
 
@@ -75,4 +78,4 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

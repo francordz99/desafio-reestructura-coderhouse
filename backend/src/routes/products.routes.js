@@ -1,6 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const ProductsManager = require('../../dao/mongodb/productManager');
+import express from 'express';
+import { Router } from 'express';
+import ProductsManager from '../../dao/mongodb/productManager';
+
+const router = Router();
 
 const productsManager = new ProductsManager();
 
@@ -113,4 +115,4 @@ router.delete('/by-code/:productCode', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

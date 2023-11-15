@@ -1,8 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const handlebars = require('handlebars');
-const cartManager = require('../../dao/mongodb/cartManager');
-const Cart = require('../../dao/models/cartModel');
+import express from 'express';
+import { Router } from 'express';
+import handlebars from 'handlebars';
+import cartManager from '../../dao/mongodb/cartManager';
+import Cart from '../../dao/models/cartModel';
+
+const router = Router();
 
 router.post('/', async (req, res) => {
     try {
@@ -84,4 +86,4 @@ router.delete('/:cartId', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

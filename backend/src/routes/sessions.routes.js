@@ -1,9 +1,12 @@
-const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcrypt');
-const passport = require('passport');
-const { config } = require('../config/config');
-const { usersModel } = require('../../dao/models/usersModel');
+import express from 'express';
+import { Router } from 'express';
+import bcrypt from 'bcrypt';
+import passport from 'passport';
+import { config } from '../config/config';
+import { usersModel } from '../../dao/models/usersModel';
+
+const router = Router();
+
 
 router.post("/register", passport.authenticate("signupLocalStrategy", {
     failureRedirect: "/failed-signup"
@@ -51,6 +54,4 @@ router.get('/current', (req, res) => {
     }
 });
 
-module.exports = {
-    sessionsRouter: router
-};
+export const sessionsRouter = router;

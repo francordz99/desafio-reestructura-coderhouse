@@ -1,6 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const { usersModel } = require('../../dao/models/usersModel.js');
+import express from 'express';
+import { Router } from 'express';
+import { usersModel } from '../../dao/models/usersModel.js';
+
+const router = Router();
+
 
 router.get("/home", (req, res) => {
     if (req.session.email) {
@@ -61,7 +64,4 @@ router.get("/admin", async (req, res) => {
     }
 });
 
-module.exports = {
-    viewsRouter: router
-};
-
+export const viewsRouter = router;

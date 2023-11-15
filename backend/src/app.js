@@ -1,37 +1,35 @@
-const express = require('express');
-const session = require('express-session');
-const FileStore = require('session-file-store');
-const { engine } = require('express-handlebars');
-const ProductManager = require('./dao/filesystem/ProductManager.js');
-const bodyParser = require('body-parser');
-const cartFunctions = require('./dao/filesystem/cartFunctions.js');
-const http = require('http');
-const socketIo = require('socket.io');
-const mongoose = require('mongoose');
-const { connectDB } = require('./src/config/dbConnect');
-const ProductsManager = require('./dao/mongodb/productManager.js');
-const MessageManager = require('./dao/mongodb/messageManager.js');
-const { CartManager } = require('./dao/mongodb/cartManager.js');
-const ProductModel = require('./dao/models/productModel.js');
-const messageManager = new MessageManager();
-const MongoStore = require('connect-mongo');
-const { viewsRouter } = require('./src/routes/views.routes.js');
-const { sessionsRouter } = require('./src/routes/sessions.routes.js');
-const bcrypt = require('bcrypt');
-const passport = require('passport');
-const { initializePassport } = require('./src/config/passport.config.js');
-const { config } = require('./src/config/config.js');
+import express from 'express';
+import session from 'express-session';
+import FileStore from 'session-file-store';
+import { engine } from 'express-handlebars';
+import ProductManager from './dao/filesystem/ProductManager.js';
+import bodyParser from 'body-parser';
+import cartFunctions from './dao/filesystem/cartFunctions.js';
+import http from 'http';
+import socketIo from 'socket.io';
+import mongoose from 'mongoose';
+import { connectDB } from './src/config/dbConnect';
+import ProductsManager from './dao/mongodb/productManager.js';
+import MessageManager from './dao/mongodb/messageManager.js';
+import { CartManager } from './dao/mongodb/cartManager.js';
+import ProductModel from './dao/models/productModel.js';
+import { viewsRouter } from './src/routes/views.routes.js';
+import { sessionsRouter } from './src/routes/sessions.routes.js';
+import bcrypt from 'bcrypt';
+import passport from 'passport';
+import { initializePassport } from './src/config/passport.config.js';
+import { config } from './src/config/config.js';
+import path from 'path';
 
 const app = express();
 const port = 8080;
 const server = http.createServer(app);
 const io = socketIo(server);
-const path = require('path');
 const cartRouter = express.Router();
 
-const productRoutes = require('./src/routes/products.routes');
-const cartsRoutes = require('./src/routes/carts.routes.js');
-const messageRoutes = require('./src/routes/messages.routes');
+import productRoutes from './src/routes/products.routes';
+import cartsRoutes from './src/routes/carts.routes.js';
+import messageRoutes from './src/routes/messages.routes';
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -117,33 +115,6 @@ app.get('/', async (req, res) => {
 
 app.use(viewsRouter);
 app.use("/api/sessions", sessionsRouter);
-
-
-// Rutas handlebars pero de filesystem
-
-/* app.get("/", async (req, res) => {
-    try {
-        const productManager = new ProductManager('./dao/filesystem/products.json');
-        const products = await productManager.getProducts();
-
-        res.render("products", { products });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error al obtener los productos.' });
-    }
-});
-
-app.get("/realtime", async (req, res) => {
-    try {
-        const productManager = new ProductManager('./dao/filesystem/products.json');
-        const products = await productManager.getProducts();
-
-        res.render("realtime", { products });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error al obtener los productos en tiempo real.' });
-    }
-}); */
 
 app.get("/carts", (req, res) => {
     res.render('carts');
@@ -337,6 +308,4 @@ server.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
 });
 
-module.exports = {
-    ProductsManager, MessageManager, CartManager
-};
+export { ProductsManager, MessageManager, CartManager };

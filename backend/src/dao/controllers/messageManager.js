@@ -1,4 +1,4 @@
-const MessageModel = require('../models/messageModel');
+import MessageModel from '../models/messageModel';
 
 class MessageManager {
     constructor() {
@@ -52,4 +52,4 @@ class MessageManager {
     }
 }
 
-module.exports = MessageManager;
+export default MessageManager;
